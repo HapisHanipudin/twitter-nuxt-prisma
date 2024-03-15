@@ -2,7 +2,7 @@
   <div :class="{ dark: darkMode }" class="bg-white dark:bg-dim-900 text-gray-950 dark:text-gray-50">
     <div class="min-h-full bg-white dark:bg-dim-900">
       <!-- App -->
-      <div v-if="false" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
+      <div v-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
         <!-- Sidebar -->
         <SidebarLeft />
 
@@ -21,4 +21,7 @@
 </template>
 <script setup>
 const darkMode = ref(false);
+
+const { useAuthUser } = useAuth();
+const user = useAuthUser();
 </script>
