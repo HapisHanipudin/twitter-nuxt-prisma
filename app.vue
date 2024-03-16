@@ -22,6 +22,9 @@
 <script setup>
 const darkMode = ref(false);
 
-const { useAuthUser } = useAuth();
+const { useAuthUser, initAuth } = useAuth();
 const user = useAuthUser();
+onBeforeMount(async () => {
+  await initAuth();
+});
 </script>

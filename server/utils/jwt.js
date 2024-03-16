@@ -25,7 +25,13 @@ export const generateTokens = (user) => {
     refreshToken: refreshToken,
   };
 };
-
+export const decodeRefreshToken = (refreshToken) => {
+  try {
+    return jwt.verify(refreshToken, useRuntimeConfig().jwtRefreshSecret);
+  } catch (error) {
+    return null;
+  }
+};
 export const sendRefreshToken = (event, refreshToken) => {
   setCookie(event, "refresh_token", refreshToken, {
     httpOnly: true,

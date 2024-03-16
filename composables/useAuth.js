@@ -28,8 +28,30 @@ export default () => {
       }
     });
   };
+  const refreshToken = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await $fetch("/api/auth/refresh");
+        setToken(data.accessToken);
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+  const initAuth = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await refreshToken();
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
   return {
     login,
     useAuthUser,
+    initAuth,
   };
 };
