@@ -1,7 +1,7 @@
 export default () => {
   const useAuthToken = () => useState("auth_token");
   const useAuthUser = () => useState("auth_user");
-  const useAuthLoading = () => useState("auth_loading", true);
+  const useAuthLoading = () => useState("auth_loading", () => true);
 
   const setToken = (token) => {
     const authToken = useAuthToken();

@@ -1,7 +1,10 @@
 <template>
   <div :class="{ dark: darkMode }" class="bg-white dark:bg-dim-900 text-gray-950 dark:text-gray-50">
     <div class="min-h-full bg-white dark:bg-dim-900">
-      <div v-if="isAuthLoading">Loading</div>
+      <div class="flex w-full h-screen justify-center items-center flex-col" v-if="isAuthLoading">
+        <span class="text-xl font-bold"> Loading </span>
+        <IconLoading class="mx-auto my-5" />
+      </div>
       <!-- App -->
       <div v-else-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
         <!-- Sidebar -->
