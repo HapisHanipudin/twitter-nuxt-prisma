@@ -1,8 +1,9 @@
 <template>
   <div :class="{ dark: darkMode }" class="bg-white dark:bg-dim-900 text-gray-950 dark:text-gray-50">
     <div class="min-h-full bg-white dark:bg-dim-900">
+      <div v-if="isAuthLoading">Loading</div>
       <!-- App -->
-      <div v-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
+      <div v-else-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
         <!-- Sidebar -->
         <SidebarLeft />
 
@@ -22,7 +23,8 @@
 <script setup>
 const darkMode = ref(false);
 
-const { useAuthUser, initAuth } = useAuth();
+const { useAuthUser, initAuth, useAuthLoading } = useAuth();
+const isAuthLoading = useAuthLoading();
 const user = useAuthUser();
 onBeforeMount(async () => {
   await initAuth();

@@ -1,3 +1,5 @@
 export default defineEventHandler(async (event) => {
-  return event.context;
+  return {
+    user: event.context.auth,
+  };
 });
