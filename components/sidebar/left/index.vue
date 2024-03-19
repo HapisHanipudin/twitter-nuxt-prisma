@@ -56,6 +56,16 @@
             </template>
             <template #nama> More </template>
           </SidebarTab>
+          <div class="xl:hidden px-3">
+            <UIButton>
+              <div class="w-6 h-6 font-bold"><PencilIcon /></div
+            ></UIButton>
+          </div>
+          <div class="max-xl:hidden">
+            <UIButton size="lg" liquid>
+              <span class="font-bold">Tweet</span>
+            </UIButton>
+          </div>
         </div>
       </div>
     </div>
@@ -63,7 +73,7 @@
 </template>
 
 <script setup>
-import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon } from "@heroicons/vue/24/outline";
+import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon, PencilIcon } from "@heroicons/vue/24/outline";
 import { HomeIcon } from "@heroicons/vue/24/solid";
 
 const { defaultTransition } = useTailwindConfig();
