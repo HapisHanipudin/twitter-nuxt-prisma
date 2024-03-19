@@ -4,9 +4,14 @@
       <img class="inline-block h-10 w-10 rounded-full" :src="props.user?.profileImage" alt="" />
     </div>
     <div class="w-full p-2">
-      <textarea v-model="text" class="w-full h-10 text-lg text-gray-900 placeholder-gray-400 dark:text-white dark:placeholder-gray-400 focus:ring-0 bg-inherit rounded-lg border-0" placeholder="What's happening?" rows="1"></textarea>
+      <textarea v-model="text" class="w-full h-10 text-lg text-gray-900 placeholder-gray-400 dark:text-white dark:placeholder-gray-400 focus:ring-0 bg-inherit rounded-lg border-0" placeholder="What's happening?"></textarea>
     </div>
-    <div><button @click="handleFormSubmit">Tweet</button></div>
+    <div class="flex p-2 pl-14">
+      <div class="p-2 text-blue-400 rounded-full hover:bg-blue-500 dark:hover:bg-dim-800"></div>
+    </div>
+  </div>
+  <div>
+    <button @click="handleFormSubmit">Tweet</button>
   </div>
 </template>
 <script setup>
