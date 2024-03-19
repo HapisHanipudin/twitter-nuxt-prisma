@@ -1,5 +1,7 @@
 <template>
-  <TweetFormInput :user="props.user" />
+  <div>
+    <TweetFormInput @onSubmit="handleFormSubmit" :user="props.user" />
+  </div>
 </template>
 <script setup>
 const props = defineProps({
@@ -8,4 +10,14 @@ const props = defineProps({
     required: true,
   },
 });
+const { postTweet } = useTweets();
+
+const handleFormSubmit = async (event) => {
+  try {
+    const response = await postTweet(event);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>

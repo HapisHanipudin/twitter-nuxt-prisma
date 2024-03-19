@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup>
-const emits = defineEmits(["submit"]);
+const emits = defineEmits(["onSubmit"]);
 const text = ref("");
 const props = defineProps({
   user: {
@@ -20,6 +20,6 @@ const props = defineProps({
 });
 
 const handleFormSubmit = () => {
-  alert(JSON.stringify({ text: text.value }));
+  emits("onSubmit", { text: text.value });
 };
 </script>
