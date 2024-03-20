@@ -19,10 +19,18 @@ export default defineEventHandler(async (event) => {
 
   const userId = event.context.auth.id;
 
-  const post = await createPost({
+  const postData = {
     caption: fields.text[0],
     authorId: userId,
-  });
+  };
+
+  const replyTo = fields.replyTo[0];
+
+  if (replyTo && replyTo.length > 0) {
+    postData.replyToId = replyTo;
+  }
+
+  const post = await createPost(postData);
 
   const filePromises = Object.keys(files).map(async (key) => {
     const file = files[key][0];
