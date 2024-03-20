@@ -24,10 +24,10 @@ export default defineEventHandler(async (event) => {
     authorId: userId,
   };
 
-  const replyTo = fields.replyTo[0];
+  const replyTo = fields.replyTo;
 
-  if (replyTo && replyTo.length > 0) {
-    postData.replyToId = replyTo;
+  if (replyTo && replyTo !== null) {
+    postData.replyToId = replyTo[0];
   }
 
   const post = await createPost(postData);

@@ -10,24 +10,6 @@ export default defineEventHandler(async (event) => {
         include: {
           author: true,
           mediaFiles: true,
-          replyTo: {
-            include: {
-              author: true,
-              mediaFiles: true,
-            },
-          },
-          replies: {
-            include: {
-              author: true,
-              mediaFiles: true,
-              replyTo: {
-                include: {
-                  author: true,
-                  mediaFiles: true,
-                },
-              },
-            },
-          },
         },
       },
       replyTo: {

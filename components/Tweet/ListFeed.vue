@@ -1,8 +1,12 @@
 <template>
-  <div><h1>list feed</h1></div>
-  <ul>
-    <li v-for="post in props.posts">{{ post }}</li>
-  </ul>
+  <div>
+    <div v-if="isEmptyArray">
+      <p class="text-center">No Posts 😢</p>
+    </div>
+    <div v-else v-for="post in props.posts" :class="[twitterBorder, defaultTransition]" class="pb-4 border-b cursor-pointer dark:hover:bg-dim-300 hover:bg-gray-100">
+      <TweetPost :post="post" :key="post.id" />
+    </div>
+  </div>
 </template>
 <script setup>
 const props = defineProps({
@@ -11,4 +15,6 @@ const props = defineProps({
     required: true,
   },
 });
+const { twitterBorder, defaultTransition } = useTailwindConfig();
+const isEmptyArray = computed(() => props.posts.length === 0);
 </script>
