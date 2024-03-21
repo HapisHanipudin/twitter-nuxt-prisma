@@ -1,45 +1,46 @@
 <template>
   <Head>
-    <Title>Home / Twitter</Title>
+    <Title>{{ post?.author.name }} on Twitter</Title>
   </Head>
-  <MainSection title="Home" :loading="loading">
-    <!-- {{ user }} -->
-
-    <div :class="twitterBorder" class="border-b">
-      <TweetForm @onSubmit="handleFormSubmit" :user="user" />
-    </div>
-    <TweetListFeed @onLoading="loading = $event" :posts="homePosts" />
+  <MainSection title="Tweet" :loading="loading">
+    <TweetDetails @onSubmit="handleFormSubmit" :user="user" :post="post" />
   </MainSection>
 </template>
-
 <script setup>
+const route = useRoute();
+const postId = computed(() => {
+  return route.params.id;
+});
+const post = ref(null);
 const loading = ref(false);
-const homePosts = ref([]);
-const { getHomePosts } = useTweets();
-
+const { getPostById } = useTweets();
 const { useAuthUser } = useAuth();
-const { twitterBorder } = useTailwindConfig();
 const user = useAuthUser();
 
-onBeforeMount(async () => {
+const getPost = async () => {
   loading.value = true;
   try {
-    const { posts } = await getHomePosts();
-    homePosts.value = posts;
+    const postData = await getPostById(postId.value);
+    post.value = postData;
+    console.log(postData);
   } catch (error) {
     console.log(error);
   } finally {
     loading.value = false;
   }
+};
+
+onBeforeMount(async () => {
+  await getPost();
 });
 const { postTweet } = useTweets();
-
 const handleFormSubmit = async (event) => {
   loading.value = true;
   try {
     const response = await postTweet({
       text: event.text,
       mediaFiles: event.mediaFiles,
+      replyTo: postId.value,
     });
   } catch (error) {
     console.log(error);

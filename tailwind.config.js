@@ -1,6 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
+  safelist: [
+    {
+      pattern: /text-(red|green|yellow|blue)-(100|400|500)/,
+      variants: ["group-hover"],
+    },
+    {
+      pattern: /bg-(red|green|yellow|blue)-(100|400|500)/,
+      variants: ["group-hover"],
+    },
+  ],
   theme: {
     screens: {
       xs: "614px",

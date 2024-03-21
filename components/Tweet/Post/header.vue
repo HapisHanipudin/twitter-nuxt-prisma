@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex">
+  <div class="p-4 flex items-center">
     <div>
       <img class="w-10 h-10 rounded-full" :src="author.profileImage" alt="" />
     </div>

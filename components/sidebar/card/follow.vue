@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="flex items-center h-full">
-        <button class="px-4 py-2 font-bold text-xs bg-gray-900 dark:bg-slate-50 dark:text-gray-900 rounded-full bg-">Follow</button>
+        <button class="px-4 py-2 font-bold text-xs text-white bg-blue-400 dark:bg-slate-50 dark:text-gray-900 rounded-full bg-">Follow</button>
       </div>
     </div>
   </div>

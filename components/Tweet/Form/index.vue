@@ -4,7 +4,7 @@
       <IconLoading class="mx-auto my-5" />
     </div>
     <div v-else>
-      <TweetFormInput @onSubmit="handleFormSubmit" :user="props.user" />
+      <TweetFormInput :placeholder="props.placeholder" @onSubmit="emits('onSubmit', $event)" :user="props.user" />
     </div>
   </div>
 </template>
@@ -15,20 +15,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  placeholder: {
+    type: String,
+    default: "What's happening?",
+  },
 });
-const { postTweet } = useTweets();
-
-const handleFormSubmit = async (event) => {
-  loading.value = true;
-  try {
-    const response = await postTweet({
-      text: event.text,
-      mediaFiles: event.mediaFiles,
-    });
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
+const emits = defineEmits(["onSubmit"]);
 </script>

@@ -5,7 +5,7 @@ import { getUserById } from "../db/users";
 import { userTransformer } from "../transformers/user";
 
 export default defineEventHandler(async (event) => {
-  const endpoints = ["/api/auth/user", "/api/user/post", "/api/post"];
+  const endpoints = ["/api/auth/user", "/api/user/post", "/api/post", "/api/post/:id"];
   const isHandled = endpoints.some((endpoint) => {
     const pattern = new UrlPattern(endpoint);
 

@@ -7,3 +7,12 @@ export const createPost = (post) => {
 export const getPosts = (params) => {
   return prisma.post.findMany({ ...params });
 };
+
+export const getPostById = (id, params = {}) => {
+  return prisma.post.findUnique({
+    ...params,
+    where: {
+      id: id,
+    },
+  });
+};

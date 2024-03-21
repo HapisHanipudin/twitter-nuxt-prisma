@@ -8,7 +8,7 @@
           </RouterLink>
         </div>
         <div class="flex flex-col gap-2">
-          <SidebarTab active>
+          <SidebarTab link="/" active>
             <template #icon>
               <HomeIcon class="h-8 w-8" />
             </template>

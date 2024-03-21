@@ -4,7 +4,7 @@
       <img class="inline-block h-10 w-10 rounded-full" :src="props.user?.profileImage" alt="" />
     </div>
     <div class="w-full p-2">
-      <textarea v-model="text" class="w-full text-lg text-gray-900 placeholder-gray-400 dark:text-white dark:placeholder-gray-400 focus:ring-0 bg-inherit rounded-lg border-0" placeholder="What's happening?"></textarea>
+      <textarea v-model="text" class="w-full text-lg text-gray-900 placeholder-gray-400 dark:text-white dark:placeholder-gray-400 focus:ring-0 bg-inherit rounded-lg border-0" :placeholder="props.placeholder"></textarea>
     </div>
   </div>
   <!-- Image Selector -->
@@ -16,7 +16,7 @@
   <div class="flex p-2 pl-14">
     <div class="flex w-full text-white">
       <!-- image -->
-      <div @click="handleImageClick" class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-500 dark:hover:bg-dim-800">
+      <div @click="handleImageClick" class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-200 dark:hover:bg-dim-800">
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
           <g>
             <path
@@ -27,7 +27,7 @@
         </svg>
       </div>
       <!-- GIf -->
-      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-500 dark:hover:bg-dim-800">
+      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-200 dark:hover:bg-dim-800">
         <!-- Gif Icon -->
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
           <g>
@@ -41,7 +41,7 @@
         </svg>
       </div>
       <!-- Chart/Polloing -->
-      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-500 dark:hover:bg-dim-800">
+      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-200 dark:hover:bg-dim-800">
         <!--  Chart Icon -->
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
           <g>
@@ -52,7 +52,7 @@
         </svg>
       </div>
       <!-- Emoji -->
-      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-500 dark:hover:bg-dim-800">
+      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-200 dark:hover:bg-dim-800">
         <!-- Emoji icon -->
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
           <g>
@@ -66,7 +66,7 @@
         </svg>
       </div>
       <!-- Calendar/Date -->
-      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-500 dark:hover:bg-dim-800">
+      <div class="p-2 text-blue-400 rounded-full cursor-pointer hover:bg-blue-200 dark:hover:bg-dim-800">
         <!-- Calendar icon -->
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
           <g>
@@ -99,6 +99,10 @@ const props = defineProps({
   user: {
     type: Object,
     required: true,
+  },
+  placeholder: {
+    type: String,
+    default: "What's happening?",
   },
 });
 

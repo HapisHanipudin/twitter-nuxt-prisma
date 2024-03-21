@@ -8,6 +8,10 @@ export default () => {
       form.append("mediaFiles" + index, mediaFile);
     });
 
+    if (formTweet.replyTo) {
+      form.append("replyTo", formTweet.replyTo);
+    }
+
     return useFetchApi("/api/user/post", {
       method: "POST",
       body: form,
@@ -25,8 +29,21 @@ export default () => {
       }
     });
   };
+  const getPostById = (id) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await useFetchApi("/api/post/" + id, {
+          method: "GET",
+        });
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
   return {
     postTweet,
     getHomePosts,
+    getPostById,
   };
 };
