@@ -25,5 +25,5 @@ const props = defineProps({
 });
 
 const author = props.post.author;
-const replyToPostUrl = computed(() => `/@${author.username}/status/${props.post.replyTo.id}`);
+const replyToPostUrl = computed(() => `/status/${props.post.replyTo.id}`);
 </script>

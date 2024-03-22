@@ -6,7 +6,7 @@
     <!-- {{ user }} -->
 
     <div :class="twitterBorder" class="border-b">
-      <TweetForm @onSubmit="handleFormSubmit" :user="user" />
+      <TweetForm :user="user" />
     </div>
     <TweetListFeed @onLoading="loading = $event" :posts="homePosts" />
   </MainSection>
@@ -32,19 +32,4 @@ onBeforeMount(async () => {
     loading.value = false;
   }
 });
-const { postTweet } = useTweets();
-
-const handleFormSubmit = async (event) => {
-  loading.value = true;
-  try {
-    const response = await postTweet({
-      text: event.text,
-      mediaFiles: event.mediaFiles,
-    });
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :class="twitterBorder" class="cursor-default border-b" :to="`/${props.post.author.handle}/status/${props.post.id}`">
+  <NuxtLink :class="twitterBorder" class="cursor-default border-b" :to="`/status/${props.post.id}`">
     <TweetPostHeader :post="props.post" />
     <div :class="wrapperClass">
       <p :class="textSize" class="flex-shrink text-gray-800 w-auto dark:text-white">
@@ -9,7 +9,7 @@
         <img class="w-full rounded-2xl" :src="image.url" alt="" />
       </div>
       <div class="mt-2">
-        <TweetPostActions :post="props.post" />
+        <TweetPostActions :compact="props.compact" :post="props.post" />
       </div>
     </div>
   </NuxtLink>

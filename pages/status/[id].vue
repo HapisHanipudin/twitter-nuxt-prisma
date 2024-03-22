@@ -3,10 +3,12 @@
     <Title>{{ post?.author.name }} on Twitter</Title>
   </Head>
   <MainSection title="Tweet" :loading="loading">
-    <TweetDetails @onSubmit="handleFormSubmit" :user="user" :post="post" />
+    <TweetDetails :user="user" :post="post" />
   </MainSection>
 </template>
 <script setup>
+import { watch } from "vue";
+
 const route = useRoute();
 const postId = computed(() => {
   return route.params.id;
@@ -22,7 +24,6 @@ const getPost = async () => {
   try {
     const postData = await getPostById(postId.value);
     post.value = postData;
-    console.log(postData);
   } catch (error) {
     console.log(error);
   } finally {
@@ -30,22 +31,9 @@ const getPost = async () => {
   }
 };
 
+watch(() => route.params.id, getPost);
+
 onBeforeMount(async () => {
   await getPost();
 });
-const { postTweet } = useTweets();
-const handleFormSubmit = async (event) => {
-  loading.value = true;
-  try {
-    const response = await postTweet({
-      text: event.text,
-      mediaFiles: event.mediaFiles,
-      replyTo: postId.value,
-    });
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-};
 </script>

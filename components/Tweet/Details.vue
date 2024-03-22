@@ -4,7 +4,7 @@
       <TweetPost compact :post="props.post" />
     </div>
     <div class="border-b pb-4" :class="twitterBorder">
-      <TweetForm placeholder="Tweet your reply" :user="props.user" @onSubmit="emit('onSubmit', $event)" />
+      <TweetForm @on-success="handleFormSuccess" placeholder="Tweet your reply" :user="props.user" :reply-to="props.post" />
     </div>
     <TweetListFeed @onLoading="loading = $event" :posts="props.post.replies" />
   </div>
@@ -23,4 +23,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const handleFormSuccess = (event) => {
+  navigateTo(`/status/${event.id}`);
+};
 </script>
