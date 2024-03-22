@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-around w-full">
-    <TweetPostActionsIcon :size="size" color="blue">
+    <TweetPostActionsIcon :size="size" @on-click="emits('onCommentClick')" color="blue">
       <template #icon="{ classes }">
         <ChatBubbleOvalLeftEllipsisIcon :class="classes" />
       </template>
@@ -27,6 +27,7 @@
   </div>
 </template>
 <script setup>
+const emits = defineEmits(["onCommentClick"]);
 const props = defineProps({
   post: {
     type: Object,

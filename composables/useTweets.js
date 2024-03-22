@@ -41,9 +41,28 @@ export default () => {
       }
     });
   };
+  const usePostModal = () => useState("postModal", () => false);
+  const useReplyPost = () => useState("replyPost", () => null);
+  const setReplyTo = (post) => {
+    const replyPost = useReplyPost();
+    replyPost.value = post;
+  };
+  const closePostModal = () => {
+    const postModal = usePostModal();
+    postModal.value = false;
+  };
+  const openPostModal = (post = null) => {
+    const postModal = usePostModal();
+    postModal.value = true;
+    setReplyTo(post);
+  };
   return {
     postTweet,
     getHomePosts,
     getPostById,
+    closePostModal,
+    usePostModal,
+    openPostModal,
+    useReplyPost,
   };
 };

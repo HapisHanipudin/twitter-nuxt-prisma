@@ -8,7 +8,7 @@
       <!-- App -->
       <div v-else-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
         <!-- Sidebar -->
-        <SidebarLeft />
+        <SidebarLeft @onTweet="handleModalOpen(null)" />
 
         <!-- Main -->
         <main class="col-span-12 xs:col-span-11 md:col-span-8 xl:col-span-6">
@@ -20,11 +20,19 @@
       </div>
 
       <AuthPage v-else />
+      <UIModal @onClose="handleModalClose" :isOpen="postModal">
+        <TweetForm :replyTo="replyPost" showReply @onSuccess="handleSuccess" :user="user" />
+      </UIModal>
     </div>
   </div>
 </template>
 <script setup>
 const darkMode = ref(false);
+const emitter = useEmitter();
+
+emitter.$on("replyTweet", (value) => {
+  openPostModal(value);
+});
 
 const { useAuthUser, initAuth, useAuthLoading } = useAuth();
 const isAuthLoading = useAuthLoading();
@@ -32,4 +40,18 @@ const user = useAuthUser();
 onBeforeMount(async () => {
   await initAuth();
 });
+const { closePostModal, usePostModal, openPostModal, useReplyPost } = useTweets();
+const postModal = usePostModal();
+const replyPost = useReplyPost();
+const handleModalClose = () => {
+  closePostModal();
+};
+const handleModalOpen = (event) => {
+  openPostModal(event);
+};
+const handleSuccess = (event) => {
+  handleModalClose();
+
+  navigateTo(`/status/${event.id}`);
+};
 </script>

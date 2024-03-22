@@ -8,8 +8,8 @@
       <div :class="twitterBorder" class="flex my-3 mr-2 border-2 rounded-2xl" v-for="image in props.post.mediaFiles" :key="image.id">
         <img class="w-full rounded-2xl" :src="image.url" alt="" />
       </div>
-      <div class="mt-2">
-        <TweetPostActions :compact="props.compact" :post="props.post" />
+      <div class="mt-2" v-if="!props.hideActions">
+        <TweetPostActions @on-comment-click="handleCommentClick" :compact="props.compact" :post="props.post" />
       </div>
     </div>
   </NuxtLink>
@@ -17,6 +17,7 @@
 
 <script setup>
 const { twitterBorder } = useTailwindConfig();
+const emitter = useEmitter();
 const props = defineProps({
   post: {
     type: Object,
@@ -26,7 +27,15 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hideActions: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const handleCommentClick = () => {
+  emitter.$emit("replyTweet", props.post);
+};
 
 const textSize = computed(() => {
   if (!props.compact) {

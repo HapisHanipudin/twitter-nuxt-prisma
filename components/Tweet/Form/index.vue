@@ -4,6 +4,7 @@
       <IconLoading class="mx-auto my-5" />
     </div>
     <div v-else>
+      <TweetPost :post="props.replyTo" v-if="props.showReply && props.replyTo" hideActions compact />
       <TweetFormInput :placeholder="props.placeholder" @onSubmit="handleFormSubmit" :user="props.user" />
     </div>
   </div>
@@ -23,6 +24,10 @@ const props = defineProps({
   replyTo: {
     type: Object,
     default: null,
+  },
+  showReply: {
+    type: Boolean,
+    default: false,
   },
 });
 const { postTweet } = useTweets();
