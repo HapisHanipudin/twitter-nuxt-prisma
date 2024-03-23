@@ -15,7 +15,7 @@
 <script setup>
 const loading = ref(false);
 const homePosts = ref([]);
-const { getHomePosts } = useTweets();
+const { getPosts } = useTweets();
 
 const { useAuthUser } = useAuth();
 const { twitterBorder } = useTailwindConfig();
@@ -24,7 +24,7 @@ const user = useAuthUser();
 onBeforeMount(async () => {
   loading.value = true;
   try {
-    const { posts } = await getHomePosts();
+    const { posts } = await getPosts();
     homePosts.value = posts;
   } catch (error) {
     console.log(error);

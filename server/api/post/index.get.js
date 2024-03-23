@@ -2,7 +2,8 @@ import { getPosts } from "~/server/db/posts";
 import { postTransformers } from "~/server/transformers/post";
 
 export default defineEventHandler(async (event) => {
-  const posts = await getPosts({
+  const { query } = getQuery(event);
+  let prismaQuery = {
     include: {
       author: true,
       mediaFiles: true,
@@ -20,8 +21,31 @@ export default defineEventHandler(async (event) => {
       },
     },
     orderBy: { createdAt: "desc" },
-  });
+  };
+  if (!!query) {
+    prismaQuery = {
+      ...prismaQuery,
+      where: {
+        OR: [
+          {
+            caption: {
+              search: query,
+            },
+          },
+          {
+            author: {
+              name: {
+                search: query,
+              },
+            },
+          },
+        ],
+      },
+    };
+  }
+  const posts = await getPosts(prismaQuery);
   return {
     posts: posts.map(postTransformers),
+    // query: query,
   };
 });

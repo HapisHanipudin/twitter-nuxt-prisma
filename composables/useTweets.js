@@ -17,11 +17,12 @@ export default () => {
       body: form,
     });
   };
-  const getHomePosts = () => {
+  const getPosts = (params = {}) => {
     return new Promise(async (resolve, reject) => {
       try {
         const data = await useFetchApi("/api/post", {
           method: "GET",
+          params,
         });
         resolve(data);
       } catch (error) {
@@ -58,7 +59,7 @@ export default () => {
   };
   return {
     postTweet,
-    getHomePosts,
+    getPosts,
     getPostById,
     closePostModal,
     usePostModal,

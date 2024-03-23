@@ -67,15 +67,37 @@
             </UIButton>
           </div>
         </div>
+        <div @click="emits('onLogout')" :class="defaultTransition" class="flex flex-row items-center justify-center px-2 py-2 mx-auto mt-auto mb-5 rounded-full cursor-pointer w-14 xl:w-full hover:bg-gray-100 dark:hover:bg-dim-800">
+          <div class="flex flex-row items-center">
+            <img :src="props.user?.profileImage" class="h-10 w-10 rounded-full" alt="" />
+            <div class="flex-col hidden ml-2 xl:flex">
+              <h1 class="text-sm font-bold text-gray-800 dark:text-white">
+                {{ user?.name }}
+              </h1>
+              <p class="text-sm text-gray-400">@{{ user?.username }}</p>
+            </div>
+          </div>
+          <div class="hidden ml-auto xl:block dark:text-white">
+            <div class="w-6 h-6">
+              <ChevronDownIcon />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon, PencilIcon } from "@heroicons/vue/24/outline";
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true,
+  },
+});
+import { HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UserIcon, EllipsisHorizontalCircleIcon, PencilIcon, ChevronDownIcon } from "@heroicons/vue/24/outline";
 import { HomeIcon } from "@heroicons/vue/24/solid";
 
-const emits = defineEmits(["onTweet"]);
+const emits = defineEmits(["onTweet", "onLogout"]);
 const { defaultTransition } = useTailwindConfig();
 </script>

@@ -1,14 +1,22 @@
 <template>
   <div>
+    <div class="w-full flex justify-center">
+      <div class="w-10 h-10">
+        <IconLogo />
+      </div>
+    </div>
     <div class="space-y-6 pt-5">
       <UIInput label="Username" placeholder="@username" v-model="data.username" />
       <UIInput label="Password" type="password" placeholder="*********" v-model="data.password" />
-      <div><button @click="handleLogin">Login</button></div>
+      <UIButton liquid :disabled="isDisabled"><button @click="handleLogin">Login</button></UIButton>
     </div>
   </div>
 </template>
 
 <script setup>
+const isDisabled = computed(() => {
+  return !data.username || !data.password || data.loading;
+});
 const data = reactive({
   username: "",
   password: "",

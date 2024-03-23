@@ -8,7 +8,7 @@
       <!-- App -->
       <div v-else-if="user" class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl lg:gap-5">
         <!-- Sidebar -->
-        <SidebarLeft @onTweet="handleModalOpen(null)" />
+        <SidebarLeft @onLogout="handleLogout" :user="user" @onTweet="handleModalOpen(null)" />
 
         <!-- Main -->
         <main class="col-span-12 xs:col-span-11 md:col-span-8 xl:col-span-6">
@@ -34,7 +34,11 @@ emitter.$on("replyTweet", (value) => {
   openPostModal(value);
 });
 
-const { useAuthUser, initAuth, useAuthLoading } = useAuth();
+emitter.$on("toggleDarkMode", () => {
+  darkMode.value = !darkMode.value;
+});
+
+const { useAuthUser, initAuth, useAuthLoading, logout } = useAuth();
 const isAuthLoading = useAuthLoading();
 const user = useAuthUser();
 onBeforeMount(async () => {
@@ -53,5 +57,8 @@ const handleSuccess = (event) => {
   handleModalClose();
 
   navigateTo(`/status/${event.id}`);
+};
+const handleLogout = () => {
+  logout();
 };
 </script>
