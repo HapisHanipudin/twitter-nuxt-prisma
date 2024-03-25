@@ -5,13 +5,13 @@
         <IconLogo />
       </div>
     </div>
-    <form class="space-y-6 pt-5">
+    <form action="" class="space-y-6 pt-5" @submit.prevent="handleLogin">
       <UIInput label="Username" placeholder="@username" v-model="data.username" />
       <UIInput label="Password" type="password" placeholder="*********" v-model="data.password" />
       <div v-if="data.loading" class="flex justify-center">
         <IconLoading class="mx-auto my-5" />
       </div>
-      <UIButton v-else liquid :disabled="isDisabled"><button @click="handleLogin">Login</button></UIButton>
+      <UIButton v-else liquid :disabled="isDisabled">Login</UIButton>
     </form>
   </div>
 </template>
