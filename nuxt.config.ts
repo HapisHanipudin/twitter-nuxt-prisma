@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
 
   build: {
-    transpile: ["@heroicons/vue"],
+    transpile: ["@heroicons/vue", "@headlessui/vue", "@tailwindcss/typography"],
   },
   runtimeConfig: {
     jwtAccessSecret: process.env.JWT_ACCESS_TOKEN_SECRET,

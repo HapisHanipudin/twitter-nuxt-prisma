@@ -8,7 +8,10 @@
     <div class="space-y-6 pt-5">
       <UIInput label="Username" placeholder="@username" v-model="data.username" />
       <UIInput label="Password" type="password" placeholder="*********" v-model="data.password" />
-      <UIButton liquid :disabled="isDisabled"><button @click="handleLogin">Login</button></UIButton>
+      <div v-if="data.loading" class="flex justify-center">
+        <IconLoading class="mx-auto my-5" />
+      </div>
+      <UIButton v-else liquid :disabled="isDisabled"><button @click="handleLogin">Login</button></UIButton>
     </div>
   </div>
 </template>
